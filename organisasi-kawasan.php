@@ -1,27 +1,28 @@
 <?php
-require 'function.php';
-require 'auth_check.php';
+include 'function.php';
+include 'auth_check.php';
 
 //input database
 //penataan kawasan
+if(isset($_POST['input1'])){
+    $inputdatapk = mysqli_query($conn, "INSERT INTO penataankawasan VALUES 
+    ('".$_POST['kodepk']."',
+    '".$_POST['nomorsk']."',
+    '".$_POST['tanggalberlaku']."',
+    '".$_POST['kodertk']."')");
 
-if(isset($_POST['inputpenataankawasan'])){
-    $kodepenataankawasan = $_POST['kodepenataankawasan'];
-    $nomorsk = $_POST['nomorsk'];
-    $tanggalberlaku = $_POST['tanggalberlaku'];
-    $kodertk = $_POST['kodertk'];
-
-    $inputdata1 = mysqli_query($conn, "INSERT INTO penataankawasan ( Kode Penataan Kawasan, No SK, Berlaku Sejak, Kode Rencana Tahunan Kegiatan) 
-    VALUES ('$kodepenataankawasan', '$nomorsk', '$tanggalberlaku', '$kodertk')");
-	$hitung1 = mysqli_num_rows($inputdata1);
-
-	if($hitung>0){
-        echo "<div class='alert alert-success'>Anda berhasil terdaftar, silakan login</div>";
+	if($inputdatapk){
+        header('location:organisasi-kawasan.php');
+        
     }
     else {
-		header('location:auth_register.php');
+		header('location:organisasi-kawasan.php');
     }
 }
+//get rttahunankegiatan
+    $getkodertk = mysqli_query($conn, "SELECT * FROM rttahunankegiatan")
+    // 
+
 ?>
 
 
@@ -35,16 +36,17 @@ if(isset($_POST['inputpenataankawasan'])){
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico"/>
     <link href="assets/css/loader.css" rel="stylesheet" type="text/css" />
     <script src="assets/js/loader.js"></script>
-
+<!--  -->
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/plugins.css" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
-
+    
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
     <link rel="stylesheet" type="text/css" href="plugins/table/datatable/datatables.css">
     <link rel="stylesheet" type="text/css" href="plugins/table/datatable/dt-global_style.css">
+    <link href="plugins/notification/snackbar/snackbar.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/components/custom-modal.css" rel="stylesheet" type="text/css" />
     <link href="plugins/animate/animate.css" rel="stylesheet" type="text/css" />
@@ -324,7 +326,9 @@ if(isset($_POST['inputpenataankawasan'])){
                         <div class="widget-content widget-content-area br-6">
                             <table id="zero-config" class="table table-striped" style="width:100%">
                                     <div class="col-lg-6 layout-top-spacing">
-                                    <button class="btn btn-outline-info mb-2 " data-toggle="modal" data-target="#penataankawasan" >Input Data</button> 
+                                    <button class="btn btn-outline-info mb-2 " data-toggle="modal" data-target="#penataankawasan" >
+                                        Input Data
+                                    </button> 
                                     </div>
                                 <thead>
                                 <tr>
@@ -335,14 +339,20 @@ if(isset($_POST['inputpenataankawasan'])){
                                     <th class="no-content">Actions</th>
                                 </tr>
                                 </thead>
-                                <tbody>
+                                <tbody>                            
+                                <?php
+                                //data tabel penataan kawasan
+                                $tabelpk = mysqli_query($conn, "SELECT * FROM penataankawasan");
+                                while ($datapk = mysqli_fetch_array($tabelpk)){
+                                ?>
                                 <tr>
-                                    <td>Tiger Nixon</td>
-                                    <td>System Architect</td>
-                                    <td>Edinburgh</td>
-                                    <td>61</td>
+                                    <td><?php echo $datapk ['Kode Penataan Kawasan']?></td>
+                                    <td><?php echo $datapk ['No SK']?></td>
+                                    <td><?php echo $datapk ['Berlaku Sejak']?></td>
+                                    <td><?php echo $datapk ['Kode Rencana Tahunan Kegiatan']?></td>
                                     <td><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle table-cancel"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></td>
                                 </tr>
+                                <?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -370,40 +380,65 @@ if(isset($_POST['inputpenataankawasan'])){
     <script src="assets/js/custom.js"></script>
     <!-- END GLOBAL MANDATORY SCRIPTS -->
 
-    <!-- Modal -->
+    <!-- Modal 01-->
     <div class="modal fade" id="penataankawasan" tabindex="-1" role="dialog" aria-labelledby="penataankawasanlabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="penataankawasanlabel">Modal title</h5>
+                    <h5 class="modal-title" id="penataankawasanlabel">Penataan Kawasan</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="form-vertical" action="#">
+                    <form class="form-vertical" method="post">
                         <div class="form-group mb-4">
-                            <label class="control-label">Kode Penataan Kawasan</label>
-                            <input type="text" name="kodepenataankawasan" class="form-control" >
+                            <label class="form-label">Kode Penataan Kawasan</label>
+                            <input type="text" name="kodepk" class="form-control" >
+                            <div class=" mt-1">
+                                <span class="badge badge-danger">
+                                    <small id="sh-text4" class="form-text mt-0">Masukkan kode penataan kawasan</small>
+                                </span>
+                            </div>
                         </div>
                         <div class="form-group mb-4">
-                            <label class="control-label">Nomor SK</label>
-                            <input type="text" name="nomorsk" class="form-control" > 
+                            <label class="form-label">Nomor SK</label>
+                            <input type="text" name="nomorsk" class="form-control" >
+                            <div class=" mt-1">
+                                <span class="badge badge-success">
+                                    <small id="sh-text4" class="form-text mt-0">Masukkan nomor SK Penataan Kawasan</small>
+                                </span>
+                            </div> 
                         </div>
                         <div class="form-group mb-4">
-                            <label class="control-label">Tanggal Berlaku</label>
-                            <input type="text" name="tanggalberlaku" class="form-control" > 
+                            <label class="form-label">Tanggal Berlaku</label>
+                            <input type="date" name="tanggalberlaku" class="form-control" >
+                            <div class=" mt-1">
+                                <span class="badge badge-success">
+                                    <small id="sh-text4" class="form-text mt-0">Masukkan tanggal terbit SK</small>
+                                </span>
+                            </div> 
                         </div>
                         <div class="form-group mb-4">
-                            <label class="control-label">Acuan Kode Kegiatan Tahunan</label>
-                            <input type="text" name="kodertk" class="form-control" >  
+                            <label class="form-label">Acuan Kode Kegiatan Tahunan</label>
+                            <select class="form-control" Name="kodertk">
+                            <?php 
+                                $getkodertk = mysqli_query($conn, "SELECT * FROM rttahunankegiatan");
+                                while($rowkodertk = mysqli_fetch_array($getkodertk)){?>
+                                <option ><?php echo $rowkodertk ['Kode Rencana Tahunan Kegiatan']?></option>
+                            </select>
+                                <?php } ?>
+                            <div class=" mt-1">
+                                <span class="badge badge-warning">
+                                    <small id="sh-text4" class="form-text mt-0">Pilih acuan Kode Kegiatan Tahunan</small>
+                                </span>
+                            </div>  
+                        </div>
+                        <div class="modal-footer">
+                        <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button>
+                        <button type="submit" name="input1" class="btn btn-primary snackbar-bg-success">Simpan</button>
                         </div>
                     </form>               
-                </div>
-
-                <div class="modal-footer">
-                    <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button>
-                    <button type="submit" name="inputpenataankawasan" class="btn btn-primary">Save</button>
                 </div>
             </div>
         </div>
@@ -420,13 +455,29 @@ if(isset($_POST['inputpenataankawasan'])){
                 "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
                 "sInfo": "Showing page _PAGE_ of _PAGES_",
                 "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
-                "sSearchPlaceholder": "Search...",
+                "sSearchPlaceholder": "Cari...",
                "sLengthMenu": "Results :  _MENU_",
             },
             "stripeClasses": [],
             "lengthMenu": [7, 10, 20, 50],
             "pageLength": 7 
         });
+    </script>
+    <!-- toastr -->
+    <script src="plugins/notification/snackbar/snackbar.min.js"></script>
+    <!-- END PAGE LEVEL PLUGINS -->
+
+    <!--  BEGIN CUSTOM SCRIPTS FILE  -->
+    <script src="assets/js/components/notification/custom-snackbar.js"></script>
+    <!--  END CUSTOM SCRIPTS FILE  -->
+    <script>
+        $('.snackbar-bg-success').click(function() {
+    Snackbar.show({
+        text: 'Success',
+        actionTextColor: '#fff',
+        backgroundColor: '#1abc9c'
+    });
+    });
     </script>
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 

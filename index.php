@@ -1,6 +1,6 @@
 <?php
-require 'function.php';
-require 'auth_check.php';
+include 'function.php';
+include 'auth_check.php';
 ?>
 
 <!DOCTYPE html>
