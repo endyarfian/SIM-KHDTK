@@ -357,10 +357,10 @@ include 'auth_check.php';
                                     $kodertkpk = $datapk ['Kode Rencana Tahunan Kegiatan'];
                                 ?>
                                 <tr>
-                                    <td><?php echo $datapk ['Kode Penataan Kawasan'];?></td>
-                                    <td><?php echo $datapk ['No SK'];?></td>
-                                    <td><?php echo $datapk ['Berlaku Sejak'];?></td>
-                                    <td><?php echo $datapk ['Kode Rencana Tahunan Kegiatan'];?></td>
+                                    <td><?=$kodepk;?></td>
+                                    <td><?=$skpk;?></td>
+                                    <td><?=$tanggalskpk;?></td>
+                                    <td><?=$kodertkpk?></td>
                                     <td>
                                   
                                         <button type = "button" class="btn btn-light-success mb-2 mr-2 rounded-circle" title="Sunting data" data-toggle = "modal" data-target = "#editpenataankawasan<?=$idpk;?>"> 
@@ -371,6 +371,7 @@ include 'auth_check.php';
                                         </button>
                                         </td>
                                 </tr>
+                                
                                         <!-- Modal edit penataan kawasan-->
                                         <div class="modal fade" id="editpenataankawasan<?=$idpk;?>" tabindex="-1" role="dialog" aria-labelledby="editpenataankawasanlabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
@@ -383,9 +384,6 @@ include 'auth_check.php';
                                                     </div>
                                                     <div class="modal-body">
                                                         <form class="form-vertical" method="post">
-                                                            <div class="form-group mb-4">
-                                                                <input type="hidden" value = "<?=$idpk;?>" name="editidpk" > 
-                                                            </div>
                                                             <div class="form-group mb-4">
                                                                 <label class="form-label">Kode Penataan Kawasan</label>
                                                                 <input type="text" name="editkodepk" value = "<?=$kodepk;?>" class="form-control" >
@@ -426,7 +424,8 @@ include 'auth_check.php';
                                                                     <span class="badge badge-success">
                                                                         <small id="sh-text4" class="form-text mt-0">Pilih acuan Kode Kegiatan Tahunan</small>
                                                                     </span>
-                                                                </div>  
+                                                                </div>
+                                                            <input type="hidden" name="idpk" value = "<?=$idpk;?>">
                                                             </div>
                                                             <div class="modal-footer">
                                                             <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i>Batal</button>
@@ -467,7 +466,7 @@ include 'auth_check.php';
                                             </div>
                                         </div>
                                         <!-- end modal delete penataan kawasan -->
-                                <?php } ?>
+                                     <?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -519,7 +518,7 @@ include 'auth_check.php';
                                         <button type = "button" class="btn btn-light-danger mb-2 mr-2 rounded-circle" title="Hapus data" data-toggle = "modal" data-target = "#hapusumt<?=$idumt;?>">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
                                         </button>
-                                        </td>
+                                    </td>
                                 </tr>
                                         <!-- Modal edit umt-->
                                         <div class="modal fade" id="editumt<?=$idumt;?>" tabindex="-1" role="dialog" aria-labelledby="editumtlabel" aria-hidden="true">
@@ -659,7 +658,7 @@ include 'auth_check.php';
                                 </thead>
                                 <tbody>                            
                                 <?php
-                                //data tabel penataan kawasan
+                                //data tabel zonasi
                                 $tabelzonasi = mysqli_query($conn, "SELECT * FROM zonasi");
                                 while ($datazonasi = mysqli_fetch_array($tabelzonasi)){
                                     $kodepkzonasi = $datazonasi ['Kode Penataan Kawasan'];
@@ -676,7 +675,14 @@ include 'auth_check.php';
                                     <td><?php echo $datazonasi ['SK Pengesahan']?></td>
                                     <td><?php echo $datazonasi ['Deskripsi']?></td>
                                     <td><?php echo $datazonasi ['Arahan Land Use']?></td>
-                                    <td><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle table-cancel"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></td>
+                                    <td>
+                                        <button type = "button" class="btn btn-light-success mb-2 mr-2 rounded-circle" title="Sunting data" data-toggle = "modal" data-target = "#editzonasi<?=$idumt;?>"> 
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                                        </button>
+                                        <button type = "button" class="btn btn-light-danger mb-2 mr-2 rounded-circle" title="Hapus data" data-toggle = "modal" data-target = "#hapuszonasi<?=$idzonasi;?>">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                                        </button>
+                                    </td>
                                 </tr>
                                 <?php } ?>
                                 </tbody>

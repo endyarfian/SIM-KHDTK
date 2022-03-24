@@ -81,17 +81,22 @@ if(isset($_POST['input4'])){
 
 //UPDATE
 //update penataan kawasan
-if(isset($_POST['updatepk'])){;
-    $editidpk = $_GET['editidpk'];
-    $editkodepk = $_POST['editkodepk'];
-    $editnosk = $_POST['editnomorsk'];
-    $edittanggalpk = $_POST['edittanggalberlaku'];
-    $editrtkpk = $_POST['editkodertk'];
 
-    $updatedatapk = mysqli_query($conn, "update penataankawasan set Kode Penataan Kawasan='$editkodepk',
-    No SK='$editnosk', Berlaku Sejak='$edittanggalpk', Kode Rencana Tahunan Kegiatan='$editrtkpk' where id='$editidpk'");
+if(isset($_POST['updatepk'])){
+  $idpk = $_POST['idpk'];
+  $editkodepk = $_POST['editkodepk'];
+  $editnomorskpk = $_POST['editnomorsk'];
+  $edittanggalpk = $_POST['edittanggalberlaku'];
+  $editkodertk = $_POST['editkodertk'];
+
+    $updatepk = mysqli_query($conn, "update penataankawasan set 
+                Kode Penataan Kawasan = '$editkodepk',
+                No SK = '$editnomorskpk',
+                Berlaku Sejak = '$edittanggalpk',
+                Kode Rencana Tahunan Kegiatan = '$editkodertk' 
+                where id = '$idpk'");
                
-	if($updatedatapk){
+	if($updatepk){
         header('location:organisasi-kawasan.php');
         
     }
@@ -99,7 +104,6 @@ if(isset($_POST['updatepk'])){;
 		header('location:organisasi-kawasan.php');
     }
 }
-
 
 //delete penataan kawasan
 if(isset($_POST['hapuspk'])){;
