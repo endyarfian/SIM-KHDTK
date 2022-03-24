@@ -23,7 +23,8 @@ if(isset($_POST['input1'])){
 //UMT
 if(isset($_POST['input2'])){
     $inputdataumt = mysqli_query($conn, "INSERT INTO UMT VALUES 
-    ('".$_POST['kodepkumt']."',
+    ('".$_POST['idumt']."',
+    '".$_POST['kodepkumt']."',
     '".$_POST['kodeumt']."',
     '".$_POST['tipeumt']."',
     '".$_POST['umt']."',
@@ -41,7 +42,8 @@ if(isset($_POST['input2'])){
 //zonasi
 if(isset($_POST['input3'])){
     $inputdatazonasi = mysqli_query($conn, "INSERT INTO zonasi VALUES 
-    ('".$_POST['kodepkzonasi']."',
+    ('".$_POST['idumt']."',
+    '".$_POST['kodepkzonasi']."',
     '".$_POST['kodezonasi']."',
     '".$_POST['zonasi']."',
     '".$_POST['skzonasi']."',
@@ -60,7 +62,8 @@ if(isset($_POST['input3'])){
 //LMU
 if(isset($_POST['input4'])){
     $inputdatazonasi = mysqli_query($conn, "INSERT INTO lmu VALUES 
-    ('".$_POST['kodepklmu']."',
+    ('".$_POST['idlmu']."',
+    '".$_POST['kodepklmu']."',
     '".$_POST['kodelmu']."',
     '".$_POST['lmu']."',
     '".$_POST['sklmu']."',
@@ -71,32 +74,6 @@ if(isset($_POST['input4'])){
     '".$_POST['pllmu']."')");
 
 	if($inputdataumt){
-        header('location:organisasi-kawasan.php');
-        
-    }
-    else {
-		header('location:organisasi-kawasan.php');
-    }
-}
-
-//UPDATE
-//update penataan kawasan
-
-if(isset($_POST['updatepk'])){
-  $idpk = $_POST['idpk'];
-  $editkodepk = $_POST['editkodepk'];
-  $editnomorskpk = $_POST['editnomorsk'];
-  $edittanggalpk = $_POST['edittanggalberlaku'];
-  $editkodertk = $_POST['editkodertk'];
-
-    $updatepk = mysqli_query($conn, "update penataankawasan set 
-                Kode Penataan Kawasan = '$editkodepk',
-                No SK = '$editnomorskpk',
-                Berlaku Sejak = '$edittanggalpk',
-                Kode Rencana Tahunan Kegiatan = '$editkodertk' 
-                where id = '$idpk'");
-               
-	if($updatepk){
         header('location:organisasi-kawasan.php');
         
     }
@@ -119,5 +96,46 @@ if(isset($_POST['hapuspk'])){;
 		header('location:organisasi-kawasan.php');
     }
 }
+//delete umt
+if(isset($_POST['hapusumt'])){;
+  $deleteidumt = $_POST['idumt'];
 
+  $deletedataumt = mysqli_query($conn, "delete from umt where id='$deleteidumt'");
+             
+if($deletedataumt){
+      header('location:organisasi-kawasan.php');
+      
+  }
+  else {
+  header('location:organisasi-kawasan.php');
+  }
+}
+//delete zonasi
+if(isset($_POST['hapuszonasi'])){;
+  $deleteidzonasi = $_POST['idzonasi'];
+
+  $deletedatazonasi = mysqli_query($conn, "delete from zonasi where id='$deleteidzonasi'");
+             
+if($deletedatazonasi){
+      header('location:organisasi-kawasan.php');
+      
+  }
+  else {
+  header('location:organisasi-kawasan.php');
+  }
+}
+//delete lmu
+if(isset($_POST['hapuslmu'])){;
+  $deleteidlmu = $_POST['idlmu'];
+
+  $deletedatalmu = mysqli_query($conn, "delete from lmu where id='$deleteidlmu'");
+             
+if($deletedatazonasi){
+      header('location:organisasi-kawasan.php');
+      
+  }
+  else {
+  header('location:organisasi-kawasan.php');
+  }
+}
 ?>

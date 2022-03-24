@@ -342,7 +342,7 @@ include 'auth_check.php';
                                     <th>Nomor SK</th>
                                     <th>Tanggal Berlaku</th>
                                     <th>Acuan Kode Kegiatan Tahunan</th>
-                                    <th class="no-content">Aksi Lanjutan</th>
+                                    <th class="no-content">Hapus Data</th>
                                 </tr>
                                 </thead>
                                 <tbody>                            
@@ -362,81 +362,11 @@ include 'auth_check.php';
                                     <td><?=$tanggalskpk;?></td>
                                     <td><?=$kodertkpk?></td>
                                     <td>
-                                  
-                                        <button type = "button" class="btn btn-light-success mb-2 mr-2 rounded-circle" title="Sunting data" data-toggle = "modal" data-target = "#editpenataankawasan<?=$idpk;?>"> 
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
-                                        </button>
                                         <button type = "button" class="btn btn-light-danger mb-2 mr-2 rounded-circle" title="Hapus data" data-toggle = "modal" data-target = "#hapuspenataankawasan<?=$idpk;?>">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
                                         </button>
                                         </td>
                                 </tr>
-                                
-                                        <!-- Modal edit penataan kawasan-->
-                                        <div class="modal fade" id="editpenataankawasan<?=$idpk;?>" tabindex="-1" role="dialog" aria-labelledby="editpenataankawasanlabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="editpenataankawasanlabel">Sunting Data Penataan Kawasan</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form class="form-vertical" method="post">
-                                                            <div class="form-group mb-4">
-                                                                <label class="form-label">Kode Penataan Kawasan</label>
-                                                                <input type="text" name="editkodepk" value = "<?=$kodepk;?>" class="form-control" >
-                                                                <div class=" mt-1">
-                                                                    <span class="badge badge-success">
-                                                                        <small id="sh-text4" class="form-text mt-0">Masukkan kode penataan kawasan</small>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group mb-4">
-                                                                <label class="form-label">Nomor SK</label>
-                                                                <input type="text" name="editnomorsk" value = "<?=$skpk;?>" class="form-control" >
-                                                                <div class=" mt-1">
-                                                                    <span class="badge badge-success">
-                                                                        <small id="sh-text4" class="form-text mt-0">Masukkan nomor SK Penataan Kawasan</small>
-                                                                    </span>
-                                                                </div> 
-                                                            </div>
-                                                            <div class="form-group mb-4">
-                                                                <label class="form-label">Tanggal Berlaku</label>
-                                                                <input type="date" name="edittanggalberlaku" value = "<?=$tanggalskpk;?>" class="form-control" >
-                                                                <div class=" mt-1">
-                                                                    <span class="badge badge-success">
-                                                                        <small id="sh-text4" class="form-text mt-0">Masukkan tanggal terbit SK</small>
-                                                                    </span>
-                                                                </div> 
-                                                            </div>
-                                                            <div class="form-group mb-4">
-                                                                <label class="form-label">Acuan Kode Kegiatan Tahunan</label>
-                                                                <select class="form-control" name="editkodertk" value='<?=$kodertkpk;?>'>
-                                                                <?php 
-                                                                    $getkodertk = mysqli_query($conn, "SELECT * FROM rttahunankegiatan");
-                                                                    while($rowkodertk = mysqli_fetch_array($getkodertk)){?>
-                                                                    <option ><?php echo $rowkodertk ['Kode Rencana Tahunan Kegiatan']?></option>
-                                                                    <?php } ?>
-                                                                </select>
-                                                                <div class=" mt-1">
-                                                                    <span class="badge badge-success">
-                                                                        <small id="sh-text4" class="form-text mt-0">Pilih acuan Kode Kegiatan Tahunan</small>
-                                                                    </span>
-                                                                </div>
-                                                            <input type="hidden" name="idpk" value = "<?=$idpk;?>">
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                            <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i>Batal</button>
-                                                            <button type="submit" name="updatepk" class="btn btn-primary">Perbarui</button>
-                                                            </div>
-                                                        </form>               
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- end edit modal penataan kawasan -->
                                         <!-- Modal delete penataan kawasan-->
                                         <div class="modal fade" id="hapuspenataankawasan<?=$idpk;?>" tabindex="-1" role="dialog" aria-labelledby="hapuspenataankawasanlabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
@@ -495,7 +425,7 @@ include 'auth_check.php';
                                     <th>Tipe UMT</th>
                                     <th>UMT</th>
                                     <th>Tanggal Berlaku</th>
-                                    <th class="no-content">Aksi Lanjutan</th>
+                                    <th class="no-content">Hapus Data</th>
                                 </tr>
                                 </thead>
                                 <tbody>                            
@@ -512,88 +442,12 @@ include 'auth_check.php';
                                     <td><?php echo $dataumt ['UMT']?></td>
                                     <td><?php echo $dataumt ['Tanggal Berlaku'];?></td>
                                     <td>
-                                        <button type = "button" class="btn btn-light-success mb-2 mr-2 rounded-circle" title="Sunting data" data-toggle = "modal" data-target = "#editumt<?=$idumt;?>"> 
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
-                                        </button>
                                         <button type = "button" class="btn btn-light-danger mb-2 mr-2 rounded-circle" title="Hapus data" data-toggle = "modal" data-target = "#hapusumt<?=$idumt;?>">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
                                         </button>
                                     </td>
                                 </tr>
-                                        <!-- Modal edit umt-->
-                                        <div class="modal fade" id="editumt<?=$idumt;?>" tabindex="-1" role="dialog" aria-labelledby="editumtlabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="editumtlabel">Sunting Data UMT</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form class="form-vertical" method="post">
-                                                            <div class="form-group mb-4">
-                                                                <label class="form-label">Kode Penataan Kawasan</label>
-                                                                <select class="form-control" Name="editkodepkumt" value="<?= $dataumt ['Kode Penataan Kawasan'];?>">
-                                                                <?php 
-                                                                    $getkodepk = mysqli_query($conn, "SELECT * FROM penataankawasan");
-                                                                    while($rowkodepk = mysqli_fetch_array($getkodepk)){?>
-                                                                    <option><?php echo $rowkodepk ['Kode Penataan Kawasan']?></option>
-                                                                    <?php } ?>
-                                                                </select>
-                                                                <div class=" mt-1">
-                                                                    <span class="badge badge-success">
-                                                                        <small id="sh-text4" class="form-text mt-0">Pilih kode penataan kawasan</small>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group mb-4">
-                                                                <label class="form-label">Kode UMT</label>
-                                                                <input type="text" name="editkodeumt" class="form-control"  value="<?= $dataumt ['Kode UMT'];?>">
-                                                                <div class=" mt-1">
-                                                                    <span class="badge badge-success">
-                                                                        <small id="sh-text4" class="form-text mt-0">Masukkan kode UMT</small>
-                                                                    </span>
-                                                                </div> 
-                                                            </div>
-                                                            <div class="form-group mb-4">
-                                                                <label class="form-label">Tipe UMT</label>
-                                                                <input type="text" name="edittipeumt"  value="<?= $dataumt ['Tipe UMT'];?>" class="form-control" >
-                                                                <div class=" mt-1">
-                                                                    <span class="badge badge-success">
-                                                                        <small id="sh-text4" class="form-text mt-0">Masukkan tipe UMT</small>
-                                                                    </span>
-                                                                </div> 
-                                                            </div>
-                                                            <div class="form-group mb-4">
-                                                                <label class="form-label">UMT</label>
-                                                                <input type="text" name="editumt"  value="<?= $dataumt ['UMT'];?>" class="form-control" >
-                                                                <div class=" mt-1">
-                                                                    <span class="badge badge-success">
-                                                                        <small id="sh-text4" class="form-text mt-0">Masukkan UMT</small>
-                                                                    </span>
-                                                                </div> 
-                                                            </div>
-                                                            <div class="form-group mb-4">
-                                                                <label class="form-label">Tanggal Berlaku</label>
-                                                                <input type="date" name="edittanggalberlakuumt"  value="<?= $dataumt ['Tanggal Berlaku'];?>" class="form-control" >
-                                                                <div class=" mt-1">
-                                                                    <span class="badge badge-success">
-                                                                        <small id="sh-text4" class="form-text mt-0">Masukkan tanggal berlaku UMT</small>
-                                                                    </span>
-                                                                </div> 
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                            <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i>Batal</button>
-                                                            <button type="submit" name="updateumt" class="btn btn-primary">Simpan</button>
-                                                            </div>
-                                                        </form>               
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- end edit modal penataan kawasan -->
-                                        <!-- Modal delete penataan kawasan-->
+                                        <!-- Modal delete tabel umt-->
                                         <div class="modal fade" id="hapusumt<?=$idumt;?>" tabindex="-1" role="dialog" aria-labelledby="hapusumtlabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
@@ -606,12 +460,12 @@ include 'auth_check.php';
                                                     <div class="modal-body">
                                                     <form class="form-vertical" method="post">
                                                         Kode Penataan Kawasan = <?= $dataumt ['Kode Penataan Kawasan'];?><br>
-                                                        Kode UMT = <?= $dataumt ['Kode UMT'];?>><br>
+                                                        Kode UMT = <?= $dataumt ['Kode UMT'];?><br>
                                                         Tipe UMT = <?= $dataumt ['Tipe UMT'];?><br>
                                                         UMT = <?= $dataumt ['UMT'];?><br>
                                                         Tanggal Berlaku UMT = <?= $dataumt ['Tanggal Berlaku'];?><br>
                                                         <div class="form-group mb-4">
-                                                            <input type="hidden" value = "<?=$idpk;?>" name="idpk" > 
+                                                            <input type="hidden" value = "<?=$idumt;?>" name="idumt" > 
                                                         </div>
                                                             <div class="modal-footer">
                                                             <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i>Batal</button>
@@ -622,7 +476,7 @@ include 'auth_check.php';
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- end modal delete penataan kawasan -->
+                                        <!-- end modal delete tabel umt -->
                                 <?php } ?>
                                 </tbody>
                             </table>
@@ -653,7 +507,7 @@ include 'auth_check.php';
                                     <th>SK Pengesahan</th>
                                     <th>Deskripsi</th>
                                     <th>Arahan <i>Land Use</i></th>
-                                    <th class="no-content">Aksi Lanjutan</th>
+                                    <th class="no-content">Hapus Data</th>
                                 </tr>
                                 </thead>
                                 <tbody>                            
@@ -661,6 +515,7 @@ include 'auth_check.php';
                                 //data tabel zonasi
                                 $tabelzonasi = mysqli_query($conn, "SELECT * FROM zonasi");
                                 while ($datazonasi = mysqli_fetch_array($tabelzonasi)){
+                                    $idzonasi = $datazonasi ['id'];
                                     $kodepkzonasi = $datazonasi ['Kode Penataan Kawasan'];
                                     $kodezonasi = $datazonasi ['Kode Zonasi'];
                                     $zonasi = $datazonasi ['Zonasi'];
@@ -669,21 +524,50 @@ include 'auth_check.php';
                                     $landuse = $datazonasi ['Arahan Land Use'];
                                 ?>
                                 <tr>
-                                    <td><?php echo $datazonasi ['Kode Penataan Kawasan']?></td>
-                                    <td><?php echo $datazonasi ['Kode Zonasi']?></td>
-                                    <td><?php echo $datazonasi ['Zonasi']?></td>
-                                    <td><?php echo $datazonasi ['SK Pengesahan']?></td>
-                                    <td><?php echo $datazonasi ['Deskripsi']?></td>
-                                    <td><?php echo $datazonasi ['Arahan Land Use']?></td>
+                                    <td><?php echo $datazonasi ['Kode Penataan Kawasan'];?></td>
+                                    <td><?php echo $datazonasi ['Kode Zonasi'];?></td>
+                                    <td><?php echo $datazonasi ['Zonasi'];?></td>
+                                    <td><?php echo $datazonasi ['SK Pengesahan'];?></td>
+                                    <td><?php echo $datazonasi ['Deskripsi'];?></td>
+                                    <td><?php echo $datazonasi ['Arahan Land Use'];?></td>
                                     <td>
-                                        <button type = "button" class="btn btn-light-success mb-2 mr-2 rounded-circle" title="Sunting data" data-toggle = "modal" data-target = "#editzonasi<?=$idumt;?>"> 
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
-                                        </button>
                                         <button type = "button" class="btn btn-light-danger mb-2 mr-2 rounded-circle" title="Hapus data" data-toggle = "modal" data-target = "#hapuszonasi<?=$idzonasi;?>">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
                                         </button>
                                     </td>
                                 </tr>
+                                <!-- Modal delete tabel zonasi-->
+                                    <div class="modal fade" id="hapuszonasi<?=$idzonasi;?>" tabindex="-1" role="dialog" aria-labelledby="hapuszonasilabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="hapuszonasilabel">Hapus Data Zonasi</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                    <span class="badge badge-danger"> Data yang akan dihapus berisi : </span>
+                                                    <form class="form-vertical" method="post">
+                                                        Kode Penataan Kawasan = <?= $kodepkzonasi;?><br>
+                                                        Kode Zonasi = <?= $kodezonasi;?><br>
+                                                        Zonasi = <?= $zonasi;?><br>
+                                                        SK Pengesahan = <?= $skzonasi;?><br>
+                                                        Deskripsi= <?= $deskripsizonasi;?><br>
+                                                        Land Use= <?= $landuse;?><br>
+                                                        <div class="form-group mb-4">
+                                                            <input type="hidden" value = "<?=$idzonasi;?>" name="idzonasi" > 
+                                                        </div>
+                                                            <div class="modal-footer">
+                                                            <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i>Batal</button>
+                                                            <button type="submit" name="hapuszonasi" class="btn btn-danger">Hapus</button>
+                                                            </div>     
+                                                    </form>         
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end modal delete tabel zonasi -->
                                 <?php } ?>
                                 </tbody>
                             </table>
@@ -717,27 +601,70 @@ include 'auth_check.php';
                                     <th><i>Slope</i></th>
                                     <th>Jenis Tanah</th>
                                     <th>Penutupan Lahan</th>
-                                    <th class="no-content">Aksi Lanjutan</th>
+                                    <th class="no-content">Hapus Data</th>
                                 </tr>
                                 </thead>
                                 <tbody>                            
                                 <?php
-                                //data tabel penataan kawasan
+                                //data tabel lmu
                                 $tabellmu = mysqli_query($conn, "SELECT * FROM lmu");
                                 while ($datalmu = mysqli_fetch_array($tabellmu)){
+                                    $idlmu = $datalmu['id'];
                                 ?>
                                 <tr>
-                                    <td><?php echo $datalmu ['Kode Penataan Kawasan']?></td>
-                                    <td><?php echo $datalmu ['Kode LMU']?></td>
-                                    <td><?php echo $datalmu ['LMU']?></td>
-                                    <td><?php echo $datalmu ['SK Pengesahan']?></td>
-                                    <td><?php echo $datalmu ['Deskripsi']?></td>
-                                    <td><?php echo $datalmu ['Altitude']?></td>
-                                    <td><?php echo $datalmu ['Slope']?></td>
-                                    <td><?php echo $datalmu ['Jenis Tanah']?></td>
-                                    <td><?php echo $datalmu ['Jenis Penutupan Lahan']?></td>
-                                    <td><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle table-cancel"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></td>
+                                    <td><?php echo $datalmu ['Kode Penataan Kawasan'];?></td>
+                                    <td><?php echo $datalmu ['Kode LMU'];?></td>
+                                    <td><?php echo $datalmu ['LMU'];?></td>
+                                    <td><?php echo $datalmu ['SK Pengesahan'];?></td>
+                                    <td><?php echo $datalmu ['Deskripsi'];?></td>
+                                    <td><?php echo $datalmu ['Altitude'];?></td>
+                                    <td><?php echo $datalmu ['Slope'];?></td>
+                                    <td><?php echo $datalmu ['Jenis Tanah'];?></td>
+                                    <td><?php echo $datalmu ['Jenis Penutupan Lahan'];?></td>
+                                    <td>
+                                        <button type = "button" class="btn btn-light-danger mb-2 mr-2 rounded-circle" title="Hapus data" data-toggle = "modal" data-target = "#hapuslmu<?=$idlmu;?>">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                                    </button>
                                 </tr>
+                                <!-- Modal delete tabel lmu-->
+                                <div class="modal fade" id="hapuslmu<?=$idlmu;?>" tabindex="-1" role="dialog" aria-labelledby="hapuslmulabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="hapuslmulabel">Hapus Data LMU</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                    <div class="alert-light-primary border-0 mb-4">
+                                                    <span class="badge outline-badge-danger"> <strong>Penting!</strong> Data dibawah ini akan dihapus.</span>
+                                                    </div>
+                                                    <form class="form-vertical" method="post">
+                                                    <ul class="list-group ">
+                                                        <li class="list-group-item">Kode Penataan Kawasan = <?=$datalmu ['Kode Penataan Kawasan'];?></li>
+                                                        <li class="list-group-item">Kode LMU = <?=$datalmu ['Kode LMU'];?></li>
+                                                        <li class="list-group-item">LMU = <?=$datalmu ['LMU'];?></li>
+                                                        <li class="list-group-item">SK Pengesahan = <?=$datalmu ['SK Pengesahan'];?></li>
+                                                        <li class="list-group-item">Deskripsi = <?=$datalmu ['Deskripsi'];?></li>
+                                                        <li class="list-group-item"><i>Altitude</i> = <?=$datalmu ['Altitude'];?></li>
+                                                        <li class="list-group-item"><i>Slope</i> = <?=$datalmu ['Slope'];?></li>
+                                                        <li class="list-group-item">Jenis Tanah = <?=$datalmu ['Jenis Tanah'];?></li>
+                                                        <li class="list-group-item">Penutupan Lahan = <?=$datalmu ['Jenis Penutupan Lahan'];?>
+                                                    </ul>
+                                                        <div class="form-group mb-4">
+                                                            <input type="hidden" value = "<?=$idlmu;?>" name="idlmu" > 
+                                                        </div>
+                                                            <div class="modal-footer">
+                                                            <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i>Batal</button>
+                                                            <button type="submit" name="hapuslmu" class="btn btn-danger">Hapus</button>
+                                                            </div>     
+                                                    </form>         
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end modal delete tabel lmu -->
                                 <?php } ?>
                                 </tbody>
                             </table>
@@ -851,6 +778,7 @@ include 'auth_check.php';
                 </div>
                 <div class="modal-body">
                     <form class="form-vertical" method="post">
+                    <input type="hidden" name="idumt" >
                         <div class="form-group mb-4">
                             <label class="form-label">Kode Penataan Kawasan</label>
                             <select class="form-control" Name="kodepkumt">
@@ -924,6 +852,7 @@ include 'auth_check.php';
                 </div>
                 <div class="modal-body">
                     <form class="form-vertical" method="post">
+                    <input type="hidden" name="idzonasi" >
                         <div class="form-group mb-4">
                             <label class="form-label">Kode Penataan Kawasan</label>
                             <select class="form-control" Name="kodepkzonasi">
@@ -1006,6 +935,7 @@ include 'auth_check.php';
                 </div>
                 <div class="modal-body">
                     <form class="form-vertical" method="post">
+                    <input type="hidden" name="idlmu" >
                         <div class="form-group mb-4">
                             <label class="form-label">Kode Penataan Kawasan</label>
                             <select class="form-control" Name="kodepklmu">
@@ -1103,6 +1033,7 @@ include 'auth_check.php';
         </div>
     </div>
     <!-- end modal lmu -->
+
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
     <script src="assets/js/scrollspyNav.js"></script>
     <script src="plugins/table/datatable/datatables.js"></script>
