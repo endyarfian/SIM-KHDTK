@@ -13,7 +13,7 @@ if(isset($_POST['input1'])){
     '".$_POST['kodertk']."')");
 
 	if($inputdatapk){
-        header('location:organisasi-kawasan.php');
+		header('organisasi-kawasan.php');
         
     }
     else {
@@ -50,7 +50,7 @@ if(isset($_POST['input3'])){
     '".$_POST['deskripsizonasi']."',
     '".$_POST['landusezonasi']."')");
 
-	if($inputdataumt){
+	if($inputdatazonasi){
         header('location:organisasi-kawasan.php');
         
     }
@@ -61,7 +61,7 @@ if(isset($_POST['input3'])){
 
 //LMU
 if(isset($_POST['input4'])){
-    $inputdatazonasi = mysqli_query($conn, "INSERT INTO lmu VALUES 
+    $inputdatalmu = mysqli_query($conn, "INSERT INTO lmu VALUES 
     ('".$_POST['idlmu']."',
     '".$_POST['kodepklmu']."',
     '".$_POST['kodelmu']."',
@@ -73,7 +73,7 @@ if(isset($_POST['input4'])){
     '".$_POST['tanahlmu']."',
     '".$_POST['pllmu']."')");
 
-	if($inputdataumt){
+	if($inputdatalmu){
         header('location:organisasi-kawasan.php');
         
     }
@@ -138,4 +138,221 @@ if($deletedatazonasi){
   header('location:organisasi-kawasan.php');
   }
 }
+
+//////////////////////////////////////////
+//anakpetak
+if(isset($_POST['inputanakpetak'])){
+  $inputdataanakpetak = mysqli_query($conn, "INSERT INTO umt_anakpetak VALUES 
+  ('".$_POST['idanakpetak']."',
+  '".$_POST['kodeanakpetak2']."',
+  '".$_POST['anakpetak']."',
+  '".$_POST['kodeumt']."')");
+
+if($inputdataanakpetak){
+      header('location:struktur-umt.php');
+      
+  }
+  else {
+  header('location:struktur-umt.php');
+  }
+}
+//cucupetak
+if(isset($_POST['inputcucupetak'])){
+  $inputdatacucupetak = mysqli_query($conn, "INSERT INTO umt_cucupetak VALUES 
+  ('".$_POST['idcucupetak']."',
+  '".$_POST['kodeanakpetakcupet']."',
+  '".$_POST['kodecucupetak']."',
+  '".$_POST['kodezonasilmucupet']."',
+  '".$_POST['luas']."',
+  '".$_POST['koorx']."',
+  '".$_POST['koory']."')");
+
+if($inputdatacucupetak){
+      header('location:struktur-umt.php');
+      
+  }
+  else {
+  header('location:struktur-umt.php');
+  }
+}
+//delete anak petak
+if(isset($_POST['hapusanakpetak'])){;
+  $deleteidanakpetak = $_POST['idanakpetak'];
+
+  $deletedataanakpetak = mysqli_query($conn, "delete from umt_anakpetak where id='$deleteidanakpetak'");
+             
+if($deletedataanakpetak){
+  header('location:struktur-umt.php');
+      
+  }
+  else {
+    header('location:struktur-umt.php');
+  }
+}
+//delete cucupetak
+if(isset($_POST['hapuscucupetak'])){;
+  $deleteidcucupetak = $_POST['idcucupetak'];
+
+  $deletedatacucupetak = mysqli_query($conn, "delete from umt_cucupetak where id='$deleteidcucupetak'");
+             
+if($deletedatacucupetak){
+  header('location:struktur-umt.php');
+      
+  }
+  else {
+    header('location:struktur-umt.php');
+  }
+}
+////////////////////////////////////
+//input data cupet tanam
+if(isset($_POST['inputcupet_tanam'])){
+  $inputdatacupet_tanam = mysqli_query($conn, "INSERT INTO umt_cupet_tnm VALUES 
+  ('".$_POST['idcupet_tanam']."',
+  '".$_POST['kodecupet_tanam']."',
+  '".$_POST['kodecupet']."',
+  '".$_POST['tanggaltanam']."',
+  '".$_POST['namailmiah']."',
+  '".$_POST['namalokal']."',
+  '".$_POST['jaraktanamx']."',
+  '".$_POST['jaraktanamy']."')");
+
+if($inputdatacupet_tanam){
+      header('location:tanaman-umt.php');
+      
+  }
+  else {
+  header('location:tanaman-umt.php');
+  }
+}
+//delete ccupet tanam
+if(isset($_POST['hapuscupet_tanam'])){;
+  $deleteidcupet_tanam = $_POST['idcupet_tanam'];
+
+  $deletedatacupet_tanam = mysqli_query($conn, "delete from umt_cupet_tnm where id='$deleteidcupet_tanam'");
+             
+  if($deletedatacupet_tanam){
+    header('location:tanaman-umt.php');
+    
+    }
+    else {
+    header('location:tanaman-umt.php');
+    }
+}
+////////////////////////////////////
+//input data inven
+if(isset($_POST['inputinven'])){
+  $inputdatainven = mysqli_query($conn, "INSERT INTO inventarisasi VALUES 
+  ('".$_POST['idinven']."',
+  '".$_POST['kodeinven']."',
+  '".$_POST['nomorskinven']."',
+  '".$_POST['tanggalberlakuinven']."',
+  '".$_POST['tanggalselesaiinven']."',
+  '".$_POST['pjinven']."',
+  '".$_POST['metodeinven']."',
+  '".$_POST['isinven']."',
+  '".$_POST['bentukpuinven']."',
+  '".$_POST['luaspuinven']."',
+  '".$_POST['kodertkinven']."',
+  '".$_POST['deskripsiinven']."')");
+
+if($inputdatainven){
+      header('location:inven-sdh.php');
+      
+  }
+  else {
+  header('location:inven-sdh.php');
+  }
+}
+//delete inven
+if(isset($_POST['hapusinven'])){;
+  $deleteidinven = $_POST['idinven'];
+
+  $deletedatainven = mysqli_query($conn, "delete from inventarisasi where id='$deleteidinven'");
+             
+  if($deletedatainven){
+    header('location:inven-sdh.php');
+    
+  }
+  else {
+  header('location:inven-sdh.php');
+  }
+}
+//input data inven umt
+if(isset($_POST['inputinvenumt'])){
+  $inputdatainvenumt = mysqli_query($conn, "INSERT INTO inventarisasi_umt VALUES 
+  ('".$_POST['idinvenumt']."',
+  '".$_POST['kodeinvenum']."',
+  '".$_POST['kodeinven2']."',
+  '".$_POST['kodecupetumt']."',
+  '".$_POST['tanggalinvenumt']."',
+  '".$_POST['pjinvenumt']."')");
+
+if($inputdatainvenumt){
+      header('location:inven-sdh.php');
+      
+  }
+  else {
+  header('location:inven-sdh.php');
+  }
+}
+//delete inven umt
+if(isset($_POST['hapusinvenumt'])){;
+  $deleteidinvenumt = $_POST['idinvenumt'];
+
+  $deletedatainvenumt = mysqli_query($conn, "delete from inventarisasi where id='$deleteidinvenumt'");
+             
+  if($deletedatainvenumt){
+    header('location:inven-sdh.php');
+    
+  }
+  else {
+  header('location:inven-sdh.php');
+  }
+}
+//input data inven pu
+if(isset($_POST['inputinvenpu'])){
+  $inputdatainvenpu = mysqli_query($conn, "INSERT INTO inventarisasi_pu VALUES 
+  ('".$_POST['idinvenpu']."',
+  '".$_POST['kodeinvenumpu']."',
+  '".$_POST['kodeinvenpu']."',
+  '".$_POST['nomorpu']."',
+  '".$_POST['tanggalinvenpu']."',
+  '".$_POST['pjinvenpu']."',
+  '".$_POST['luasinvenpu']."',
+  '".$_POST['bentukinvenpu']."',
+  '".$_POST['koorxinvenpu']."',
+  '".$_POST['kooryinvenpu']."',
+  '".$_POST['ndvi']."',
+  '".$_POST['msavi']."',
+  '".$_POST['c']."',
+  '".$_POST['d']."',
+  '".$_POST['n']."',
+  '".$_POST['jenistanah']."',
+  '".$_POST['kelerengan']."',
+  '".$_POST['altitude']."'
+  )");
+
+if($inputdatainvenpu){
+      header('location:inven-sdh.php');
+      
+  }
+  else {
+  header('location:inven-sdh.php');
+  }
+}
+//delete inven umt
+if(isset($_POST['hapusinvenpu'])){;
+  $deleteidinvenpu = $_POST['idinvenpu'];
+
+  $deletedatainvenpu = mysqli_query($conn, "delete from inventarisasi where id='$deleteidinvenpu'");
+             
+  if($deletedatainvenpu){
+    header('location:inven-sdh.php');
+    
+  }
+  else {
+  header('location:inven-sdh.php');
+  }
+}
+
 ?>

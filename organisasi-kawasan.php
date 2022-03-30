@@ -23,12 +23,12 @@ include 'auth_check.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
     <title>Pengorganisasian Kawasan - Sistem Informasi Manejemen KHDTK UGM </title>
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico"/>
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.png"/>
     <link href="assets/css/loader.css" rel="stylesheet" type="text/css" />
     <script src="assets/js/loader.js"></script>
 <!--  -->
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:400,600,700" rel="stylesheet">
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/plugins.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="assets/css/structure.css">
@@ -40,10 +40,14 @@ include 'auth_check.php';
     <link rel="stylesheet" type="text/css" href="assets/css/elements/breadcrumb.css">
     <link rel="stylesheet" type="text/css" href="assets/css/elements/search.css">
     <link rel="stylesheet" type="text/css" href="plugins/table/datatable/dt-global_style.css">
-    <link href="plugins/notification/snackbar/snackbar.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/components/custom-modal.css" rel="stylesheet" type="text/css" />
     <link href="plugins/animate/animate.css" rel="stylesheet" type="text/css" />
+    <script src="plugins/sweetalerts/promise-polyfill.js"></script>
+    <link href="plugins/sweetalerts/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <link href="plugins/sweetalerts/sweetalert.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/components/custom-sweetalert.css" rel="stylesheet" type="text/css" />
+    
     <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
 
 </head>
@@ -75,15 +79,7 @@ include 'auth_check.php';
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                     </a>
                     <div class="dropdown-menu position-absolute" aria-labelledby="userProfileDropdown">
-                        <div class="user-profile-section">
-                            <div class="media mx-auto">
-                                <img src="assets/img/90x90.jpg" class="img-fluid mr-2" alt="avatar">
-                                <div class="media-body">
-                                    <h5>echo</h5>
-                                    <p>echo</p>
-                                </div>
-                            </div>
-                        </div>
+                       >
                         <div class="dropdown-item">
                             <a href="user_profile.php">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> <span>Profile</span>
@@ -142,7 +138,7 @@ include 'auth_check.php';
                                 <a href="index.php"> Analisis </a>
                             </li>
                             <li>
-                                <a href="index2.html"> Ringkasan </a>
+                                <a href="laporan.php"> Laporan</a>
                             </li>
                         </ul>
                     </li>
@@ -154,7 +150,16 @@ include 'auth_check.php';
                     </li>
 
                     <li class="menu">
-                        <a href="apps_notes.html" aria-expanded="false" class="dropdown-toggle">
+                        <a href="apps_maps.php" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
+                            <span>Web GIS</span>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li class="menu">
+                        <a href="apps_notes.php" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                                 <span>Catatan</span>
@@ -163,16 +168,7 @@ include 'auth_check.php';
                     </li>
 
                     <li class="menu">
-                        <a href="apps_scrumboard.html" aria-expanded="false" class="dropdown-toggle">
-                            <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-plus"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
-                                <span>Kanban Board</span>
-                            </div>
-                        </a>
-                    </li>
-
-                    <li class="menu">
-                        <a href="apps_calendar.html" aria-expanded="false" class="dropdown-toggle">
+                        <a href="apps_calendar.php" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                                 <span>Kalender</span>
@@ -190,7 +186,7 @@ include 'auth_check.php';
                         <a href="#penataan" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
                             <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-                                <span>Penataan kawasan</span>
+                                <span>Penataan Kawasan</span>
                             </div>
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
@@ -268,11 +264,13 @@ include 'auth_check.php';
 
                     <!--  begin profil  -->
                     <li class="menu menu-heading">
-                        <div class="heading"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg><span>AKUN</span></div>
+                        <div class="heading"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                        <span>AKUN</span>
+                    </div>
                     </li>
 
                     <li class="menu">
-                        <a href="table_basic.html" aria-expanded="false" class="dropdown-toggle">
+                        <a href="#" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                              <span>Profil</span>
@@ -281,7 +279,7 @@ include 'auth_check.php';
                     </li>
 
                     <li class="menu">
-                        <a href="#datatables" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <a href="#" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>                                
                             <span>Pengaturan</span>
@@ -290,7 +288,7 @@ include 'auth_check.php';
                     </li>
 
                     <li class="menu">
-                        <a href="table_basic.html" aria-expanded="false" class="dropdown-toggle">
+                        <a href="auth_logout.php" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
                              <span>Logout</span>
@@ -316,17 +314,17 @@ include 'auth_check.php';
                         <div class="page-header">
                             
                                 <div class="page-title breadcrumb-four">
-                                    <ul class="breadcrumb">
+                                <ul class="breadcrumb">
                                         <li><a href="index.php"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></a>
                                         </li>
-                                        <li><a href="javscript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-                                        Penataan Kawasan</a></li>
-                                        <li  class="active"><a href="javscript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg> 
+                                        <li><a href="javscript:void(0);">
+                                        Penataan Kawasan & Pengorganisasian Kawasan</a></li>
+                                        <li  class="active"><a href="javscript:void(0);">
                                         Pengorganisasian Kawasan</a></li>
                                     </ul>
                                     <br>
                                     <br>
-                                <h3><b>Tabel Penataan Kawasan</b></h3>  
+                                <h3><b>DATA PENATAAN KAWASAN</b></h3>  
                             </div>
                         </div>
                         <div class="widget-content widget-content-area br-6">
@@ -378,11 +376,14 @@ include 'auth_check.php';
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
+                                                        <div class="alert-light-primary border-0 mb-4">
+                                                            <span class="badge outline-badge-danger"> <strong>Penting!</strong> Data dibawah ini akan dihapus.</span>
+                                                        </div>
                                                     <form class="form-vertical" method="post">
-                                                        Kode Penataan Kawasan = <?=$kodepk;?><br>
-                                                        Nomor SK = <?=$skpk;?><br>
-                                                        Tanggal Berlaku = <?=$tanggalskpk;?><br>
-                                                        Acuan Kode Kegiatan Tahunan = <?=$kodertkpk;?><br>
+                                                        <li class="list-group-item">Kode Penataan Kawasan = <?=$kodepk;?></li>
+                                                        <li class="list-group-item">Nomor SK = <?=$skpk;?></li>
+                                                        <li class="list-group-item">Tanggal Berlaku = <?=$tanggalskpk;?></li>
+                                                        <li class="list-group-item">Acuan Kode Kegiatan Tahunan = <?=$kodertkpk;?></li>
                                                         <div class="form-group mb-4">
                                                             <input type="hidden" value = "<?=$idpk;?>" name="idpk" > 
                                                         </div>
@@ -408,7 +409,7 @@ include 'auth_check.php';
                 <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                         <div class="page-header">
                             <div class="page-title">
-                                <h3><b>Daftar Unit Manajemen Terkecil</b></h3>  
+                                <h3><b>DATA UNIT MANAJEMEN TERKECIL</b></h3>  
                             </div>
                         </div>
                         <div class="widget-content widget-content-area br-6">
@@ -458,12 +459,15 @@ include 'auth_check.php';
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
+                                                        <div class="alert-light-primary border-0 mb-4">
+                                                            <span class="badge outline-badge-danger"> <strong>Penting!</strong> Data dibawah ini akan dihapus.</span>
+                                                        </div>
                                                     <form class="form-vertical" method="post">
-                                                        Kode Penataan Kawasan = <?= $dataumt ['Kode Penataan Kawasan'];?><br>
-                                                        Kode UMT = <?= $dataumt ['Kode UMT'];?><br>
-                                                        Tipe UMT = <?= $dataumt ['Tipe UMT'];?><br>
-                                                        UMT = <?= $dataumt ['UMT'];?><br>
-                                                        Tanggal Berlaku UMT = <?= $dataumt ['Tanggal Berlaku'];?><br>
+                                                        <li class="list-group-item">Kode Penataan Kawasan = <?= $dataumt ['Kode Penataan Kawasan'];?></li>
+                                                        <li class="list-group-item">Kode UMT = <?= $dataumt ['Kode UMT'];?></li>
+                                                        <li class="list-group-item">Tipe UMT = <?= $dataumt ['Tipe UMT'];?></li>
+                                                        <li class="list-group-item">UMT = <?= $dataumt ['UMT'];?></li>
+                                                        <li class="list-group-item">Tanggal Berlaku UMT = <?= $dataumt ['Tanggal Berlaku'];?></li>
                                                         <div class="form-group mb-4">
                                                             <input type="hidden" value = "<?=$idumt;?>" name="idumt" > 
                                                         </div>
@@ -489,7 +493,7 @@ include 'auth_check.php';
                 <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                         <div class="page-header">
                             <div class="page-title">
-                                <h3><b>Daftar Zonasi Kawasan</b></h3>  
+                                <h3><b>DATA ZONASI KAWASAN</b></h3>  
                             </div>
                         </div>
                         <div class="widget-content widget-content-area br-6">
@@ -547,14 +551,16 @@ include 'auth_check.php';
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                    <span class="badge badge-danger"> Data yang akan dihapus berisi : </span>
+                                                        <div class="alert-light-primary border-0 mb-4">
+                                                            <span class="badge outline-badge-danger"> <strong>Penting!</strong> Data dibawah ini akan dihapus.</span>
+                                                        </div>
                                                     <form class="form-vertical" method="post">
-                                                        Kode Penataan Kawasan = <?= $kodepkzonasi;?><br>
-                                                        Kode Zonasi = <?= $kodezonasi;?><br>
-                                                        Zonasi = <?= $zonasi;?><br>
-                                                        SK Pengesahan = <?= $skzonasi;?><br>
-                                                        Deskripsi= <?= $deskripsizonasi;?><br>
-                                                        Land Use= <?= $landuse;?><br>
+                                                        <li class="list-group-item">Kode Penataan Kawasan = <?= $kodepkzonasi;?></li>
+                                                        <li class="list-group-item">Kode Zonasi = <?= $kodezonasi;?></li>
+                                                        <li class="list-group-item">Zonasi = <?= $zonasi;?></li>
+                                                        <li class="list-group-item">SK Pengesahan = <?= $skzonasi;?></li>
+                                                        <li class="list-group-item">Deskripsi= <?= $deskripsizonasi;?></li>
+                                                        <li class="list-group-item">Land Use= <?= $landuse;?></li>
                                                         <div class="form-group mb-4">
                                                             <input type="hidden" value = "<?=$idzonasi;?>" name="idzonasi" > 
                                                         </div>
@@ -580,7 +586,7 @@ include 'auth_check.php';
                 <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                         <div class="page-header">
                             <div class="page-title">
-                                <h3><b>Daftar <i>Land Management Units</i></b></h3>  
+                                <h3><b>DATA <i>LAND MANAGEMENT UNITS</i></b></h3>  
                             </div>
                         </div>
                         <div class="widget-content widget-content-area br-6">
@@ -674,7 +680,7 @@ include 'auth_check.php';
                 <!-- end tabel LMU -->
                 <div class="footer-wrapper">
                     <div class="footer-section f-section-1">
-                        <p class="">Copyright © 2021 <a target="#" href="https://designreset.com">enlisters studio</a>, All rights reserved.</p>
+                        <p class="">Copyright © 2022, Rebuild & Reconstruct by<a target="#" href="#"> endyarfian</a></p>
                     </div>
                 </div>
                 </div>
@@ -697,8 +703,14 @@ include 'auth_check.php';
             App.init();
         });
     </script>
+    <script src="plugins/highlight/highlight.pack.js"></script>
     <script src="assets/js/custom.js"></script>
     <!-- END GLOBAL MANDATORY SCRIPTS -->
+    <!-- BEGIN THEME GLOBAL STYLE -->
+    <script src="assets/js/scrollspyNav.js"></script>
+    <script src="plugins/sweetalerts/sweetalert2.min.js"></script>
+    <script src="plugins/sweetalerts/custom-sweetalert.js"></script>
+    <!-- END THEME GLOBAL STYLE -->  
     
     <!-- MODAL -->
     <!-- Modal penataan kawasan-->
@@ -1109,23 +1121,7 @@ include 'auth_check.php';
             "pageLength": 7 
         });
     </script>
-    <!-- toastr -->
-    <script src="plugins/notification/snackbar/snackbar.min.js"></script>
-    <!-- END PAGE LEVEL PLUGINS -->
 
-    <!--  BEGIN CUSTOM SCRIPTS FILE  -->
-    <script src="assets/js/components/notification/custom-snackbar.js"></script>
-    <!--  END CUSTOM SCRIPTS FILE  -->
-    <script>
-        $('.snackbar-bg-success').click(function() {
-    Snackbar.show({
-        text: 'Success',
-        actionTextColor: '#fff',
-        backgroundColor: '#1abc9c'
-    });
-    });
-    </script>
-    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 
 </body>
 </html>
